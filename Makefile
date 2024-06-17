@@ -29,5 +29,13 @@ main.hex: main.elf
 	avr-objcopy -j .text -j .data -O ihex main.elf main.hex
 	avr-size --format=avr --mcu=$(DEVICE) main.elf
 
+# Burn new code using Micronucleus loader
 update : main.hex
-	$(AVRDUDE) -U flash:w:main.hex
+	micronucleus $^
+
+# Burn new code using Polulu AVR ISP
+updateisp : main.hex
+	$(AVRDUDE) -U flash:w:$^
+
+test :
+	$(AVRDUDE)

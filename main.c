@@ -4,7 +4,7 @@
 
 int main() {
 	while (1) {
-    PORTB ^= 2;
+    PINB |= 2;
     _delay_ms(500);
   }
 }
